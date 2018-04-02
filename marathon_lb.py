@@ -753,6 +753,8 @@ def generateHttpVhostAcl(
                 https_frontend_acl = \
                     templater.haproxy_https_frontend_acl_only_with_path(app)
                 staging_https_frontends += https_frontend_acl.format(
+                    cleanedUpHostname=acl_name,
+                    hostname=vhosts[0],
                     path=app.path,
                     backend=backend
                 )
@@ -800,6 +802,7 @@ def generateHttpVhostAcl(
                         cleanedUpHostname=acl_name,
                         hostname=vhost_hostname,
                         appId=app.appId,
+                        path=app.path,
                         backend=backend
                     )
             else:
@@ -955,7 +958,9 @@ def generateHttpVhostAcl(
                 templater.haproxy_https_frontend_acl_only_with_path(app)
             staging_https_frontends += https_frontend_acl.format(
                 path=app.path,
-                backend=backend
+                backend=backend,
+                cleanedUpHostname=acl_name,
+                hostname=app.hostname
             )
             if app.authRealm:
                 https_frontend_acl = \
@@ -976,7 +981,8 @@ def generateHttpVhostAcl(
                     cleanedUpHostname=acl_name,
                     hostname=app.hostname,
                     appId=app.appId,
-                    backend=backend
+                    backend=backend,
+                    path=app.path
                 )
         else:
             if app.redirectHttpToHttps:
