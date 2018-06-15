@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         inetutils-syslogd \
         iptables \
-        libcurl3 \
+        libcurl4 \
         liblua5.3-0 \
         libssl1.0.2 \
         openssl \
@@ -34,8 +34,8 @@ RUN set -x \
 
 
 ENV HAPROXY_MAJOR=1.7 \
-    HAPROXY_VERSION=1.7.6 \
-    HAPROXY_MD5=8f4328cf66137f0dbf6901e065f603cc
+    HAPROXY_VERSION=1.7.11 \
+    HAPROXY_MD5=25be5ad717a71da89a65c3c24250e2eb
 
 COPY requirements.txt /marathon-lb/
 
